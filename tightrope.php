@@ -197,7 +197,7 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    }
    // Check if Phone is set
    if( $phone && $phone == 'checked' ) {
-     echo '<input type="text" name="Mobile" placeholder="Phone" maxlength="64" id="signup_Mobile" class="field"/>';
+     echo '<input type="text" name="Mobile" placeholder="Phone" maxlength="64" id="signup_Mobile" class="field" onblur="validateData(this.form,this.id)"/>';
    }
   // Check if interests
    if( $interests && $interests == 'checked' ) {
@@ -219,10 +219,10 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
   </select>';
    }
    if ( $submit ) {
-      echo '<input id="formSubmit" type="submit" name="formSubmit" value="'.$submit.'"/>';
+      echo '<input id="formSubmit" type="submit" name="formSubmit" value="'.$submit.'" onclick="javascript: return SubmitForm()" />';
    }
    if ( !$submit ) {
-      echo '<input id="formSubmit" type="submit" name="formSubmit" value="Send" />';
+      echo '<input id="formSubmit" type="submit" name="formSubmit" value="Send" onclick="javascript: return SubmitForm()" />';
    }
 
 
