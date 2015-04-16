@@ -121,9 +121,39 @@ function SubmitForm()
 {
     event.preventDefault();
     
+  var interest = document.getElementById('signup_SkillsInterests');
 
+    if(!interest.value){
+    validInterest = false;
+    if(values.length == 0 ){
+              values.push("Invalid Interest");
+        nointerest = false;
+    }
+    else{
+        for(var i = 0; i < values.length; i++){
+      if(values[i] == "Invalid Interest"){
+          nointerest = false;
+          break;
+      }
+        }
+    if(nointerest){
+       values.push("Invalid Interest");
+       nointerest = false;
+    }
+    }
+  }
+  else{
+            validInterest = true;
+      for(var i = 0; i < values.length; i++){
+          if(values[i]=="Invalid Interest"){
+        values.splice(i,1);
+        nointerest = true;
+        break;
+          }
+      }
+  }
 
-    if(validName == false || validEmail == false || validPhone == false || validInterest == false){
+    if(validName == false && validEmail == false && validPhone == false && validInterest == false){
         str2 = values.toString();
         alert(str2);
     }
