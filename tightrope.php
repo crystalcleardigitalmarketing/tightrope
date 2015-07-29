@@ -25,14 +25,22 @@ if( $instance) {
      $heading = esc_attr($instance['heading']);
      $subheading = esc_attr($instance['subheading']);
      $value = esc_attr($instance['value']);
+     $actionType = esc_attr($instance['actionType']);
      $action = esc_attr($instance['action']);
      $fullname = esc_attr($instance['fullname']);
      $email = esc_attr($instance['email']);
      $phone = esc_attr($instance['phone']);
+     $location = esc_attr($instance['location']);
+     $locationone = esc_attr($instance['locationone']);
+     $locationtwo = esc_attr($instance['locationtwo']);
+     $locationthree = esc_attr($instance['locationthree']);
+     $locationfour = esc_attr($instance['locationfour']);
      $interests = esc_attr($instance['interests']);
+     $dropdown = esc_attr($instance['dropdown']);
+     $placeholder = esc_attr($instance['placeholder']);
      $procedureone = esc_attr($instance['procedureone']);
      $proceduretwo = esc_attr($instance['proceduretwo']);
-    $procedurethree = esc_attr($instance['procedurethree']);
+     $procedurethree = esc_attr($instance['procedurethree']);
      $procedurefour = esc_attr($instance['procedurefour']);
      $orientation = esc_attr($instance['orientation']);
      $submit = esc_attr($instance['submit']);
@@ -43,11 +51,19 @@ else {
      $heading = '';
      $subheading = '';
      $value = '';
+     $actionType = '';
      $action = '';
      $fullname= '';
      $email = '';
      $phone = '';
+     $location = '';
      $interests = '';
+     $dropdown = '';
+     $placeholder = '';
+     $procedureone = '';
+     $proceduretwo = '';
+     $procedurethree = '';
+     $procedurefour = '';
      $orientation = '';
      $submit = '';
 }
@@ -69,7 +85,15 @@ else {
 <input class="widefat" id="<?php echo $this->get_field_id('value'); ?>" name="<?php echo $this->get_field_name('value');?>" type="text" value="<?php echo $value; ?>" />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('action'); ?>"><?php _e('API key:', 'tightrope_form_widget'); ?></label>
+<label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Unique Form Action:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="unique" checked="checked" <?php checked( 'unique', $actionType ); ?> />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Standard API key:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="standard" <?php checked( 'standard', $actionType ); ?> />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('action'); ?>"><?php _e('Form Action:', 'tightrope_form_widget'); ?></label>
 <input class="widefat" id="<?php echo $this->get_field_id('action'); ?>" name="<?php echo $this->get_field_name('action');?>" type="text" value="<?php echo $action; ?>" />
 </p>
 <p>
@@ -85,22 +109,54 @@ else {
 <input id="<?php echo $this->get_field_id('phone'); ?>" name="<?php echo $this->get_field_name('phone'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $phone ); ?> />
 </p>
 <p>
+<label for="<?php echo $this->get_field_id('location'); ?>"><?php _e('Location:', 'tightrope_form_widget'); ?></label>
+<input id="<?php echo $this->get_field_id('location'); ?>" name="<?php echo $this->get_field_name('location'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $location ); ?> />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('locationone'); ?>"><?php _e('Location 1:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('locationone'); ?>" name="<?php echo $this->get_field_name('locationone');?>" type="text" value="<?php echo $locationone; ?>" />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('locationtwo'); ?>"><?php _e('Location 2:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('locationtwo'); ?>" name="<?php echo $this->get_field_name('locationtwo');?>" type="text" value="<?php echo $locationtwo; ?>" />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('locationthree'); ?>"><?php _e('Location 3:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('locationthree'); ?>" name="<?php echo $this->get_field_name('locationthree');?>" type="text" value="<?php echo $locationthree; ?>" />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('locationfour'); ?>"><?php _e('Location 4:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('locationfour'); ?>" name="<?php echo $this->get_field_name('locationfour');?>" type="text" value="<?php echo $locationfour; ?>" />
+</p>
+<p>
 <label for="<?php echo $this->get_field_id('interests'); ?>"><?php _e('Interests:', 'tightrope_form_widget'); ?></label>
 <input id="<?php echo $this->get_field_id('interests'); ?>" name="<?php echo $this->get_field_name('interests'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $interests ); ?> />
 </p>
-<P>
+<p>
+<label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e('Dropdown:', 'tightrope_form_widget'); ?></label>
+<input id="<?php echo $this->get_field_id('dropdown'); ?>" name="<?php echo $this->get_field_name('dropdown'); ?>" type="radio" value="dropdown" checked="checked" <?php checked( 'dropdown', $dropdown ); ?> />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e('Text Field:', 'tightrope_form_widget'); ?></label>
+<input id="<?php echo $this->get_field_id('dropdown'); ?>" name="<?php echo $this->get_field_name('dropdown'); ?>" type="radio" value="textfield" <?php checked( 'textfield', $dropdown ); ?> />
+</p>
+<p>
+<label for="<?php echo $this->get_field_id('placeholder'); ?>"><?php _e('Placeholder Text:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('placeholder'); ?>" name="<?php echo $this->get_field_name('placeholder');?>" type="text" value="<?php echo $placeholder; ?>" />
+</p>
+<p>
 <label for="<?php echo $this->get_field_id('procedureone'); ?>"><?php _e('Procedure 1:', 'tightrope_form_widget'); ?></label>
 <input class="widefat" id="<?php echo $this->get_field_id('procedureone'); ?>" name="<?php echo $this->get_field_name('procedureone');?>" type="text" value="<?php echo $procedureone; ?>" />
 </p>
-<P>
+<p>
 <label for="<?php echo $this->get_field_id('proceduretwo'); ?>"><?php _e('Procedure 2:', 'tightrope_form_widget'); ?></label>
 <input class="widefat" id="<?php echo $this->get_field_id('proceduretwo'); ?>" name="<?php echo $this->get_field_name('proceduretwo');?>" type="text" value="<?php echo $proceduretwo; ?>" />
 </p>
-<P>
+<p>
 <label for="<?php echo $this->get_field_id('procedurethree'); ?>"><?php _e('Procedure 3:', 'tightrope_form_widget'); ?></label>
 <input class="widefat" id="<?php echo $this->get_field_id('procedurethree'); ?>" name="<?php echo $this->get_field_name('procedurethree');?>" type="text" value="<?php echo $procedurethree; ?>" />
 </p>
-<P>
+<p>
 <label for="<?php echo $this->get_field_id('procedurefour'); ?>"><?php _e('Procedure 4:', 'tightrope_form_widget'); ?></label>
 <input class="widefat" id="<?php echo $this->get_field_id('procedurefour'); ?>" name="<?php echo $this->get_field_name('procedurefour');?>" type="text" value="<?php echo $procedurefour; ?>" />
 </p>
@@ -132,11 +188,19 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
       $instance['heading'] = strip_tags($new_instance['heading']);
       $instance['subheading'] = strip_tags($new_instance['subheading']);
       $instance['value'] = strip_tags($new_instance['value']);
+      $instance['actionType'] = strip_tags($new_instance['actionType']);
       $instance['action'] = strip_tags($new_instance['action']);
       $instance['fullname'] = strip_tags($new_instance['fullname']);
       $instance['email'] = strip_tags($new_instance['email']);
       $instance['phone'] = strip_tags($new_instance['phone']);
+      $instance['location'] = strip_tags($new_instance['location']);
+      $instance['locationone'] = strip_tags($new_instance['locationone']);
+      $instance['locationtwo'] = strip_tags($new_instance['locationtwo']);
+      $instance['locationthree'] = strip_tags($new_instance['locationthree']);
+      $instance['locationfour'] = strip_tags($new_instance['locationfour']);
       $instance['interests'] = strip_tags($new_instance['interests']);
+      $instance['dropdown'] = strip_tags($new_instance['dropdown']);
+      $instance['placeholder'] = strip_tags($new_instance['placeholder']);
       $instance['procedureone'] = strip_tags($new_instance['procedureone']);
       $instance['proceduretwo'] = strip_tags($new_instance['proceduretwo']);
       $instance['procedurethree'] = strip_tags($new_instance['procedurethree']);
@@ -155,11 +219,19 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    $heading = $instance['heading'];
    $subheading = $instance['subheading'];
    $value = $instance['value'];
+   $actionType = $instance['actionType'];
    $action = $instance['action'];
    $fullname = $instance['fullname'];
    $email = $instance['email'];
    $phone = $instance['phone'];
+   $location = $instance['location'];
+   $locationone = $instance['locationone'];
+   $locationtwo = $instance['locationtwo'];
+   $locationthree = $instance['locationthree'];
+   $locationfour = $instance['locationfour'];
    $interests = $instance['interests'];
+   $dropdown = $instance['dropdown'];
+   $placeholder = $instance['placeholder'];
    $procedureone = $instance['procedureone'];
    $proceduretwo = $instance['proceduretwo'];
    $procedurethree = $instance['procedurethree'];
@@ -175,9 +247,14 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    }
    //form 
    echo '<div class="widget-text tightrope_form_widget_box">
-          <div class="form-container-'.$orientation.'">
-            <form name="signupForm" id="signupForm" method="post" action="http://app.crystalpec.com/j1.pl?'.$action.'"> 
-              <input type="hidden" name="AutomaticTeamIDs" value='.$value.' />';
+          <div class="form-container-'.$orientation.'">';
+     if($actionType == 'standard'){
+            echo '<form name="signupForm" id="signupForm" method="post" action="http://app.crystalpec.com/j1.pl?'.$action.'">';
+     }
+     else if($actionType == 'unique'){
+    echo '<form name="signupForm" id="signupForm" method="post" action="'.$action.'">';
+     } 
+           echo '<input type="hidden" name="AutomaticTeamIDs" value='.$value.' />';
    // Check if heading is set
    if ( $heading ) {
       echo'<div class="heading"><h2>'.$heading.'</h2></div>';
@@ -193,31 +270,64 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    }
    // Check if Email is set
    if( $email && $email == 'checked' ) {
-     echo '<input type="text" name="Email" placeholder="Email" maxlength="64" id="signup_Email" class="field" onblur="validateData(this.form,this.id)"/>';
+     echo '<input type="email" name="Email" placeholder="Email" maxlength="64" id="signup_Email" class="field" onblur="validateData(this.form,this.id)"/>';
    }
    // Check if Phone is set
    if( $phone && $phone == 'checked' ) {
      echo '<input type="text" name="Mobile" placeholder="Phone" maxlength="64" id="signup_Mobile" class="field" onblur="validateData(this.form,this.id)"/>';
    }
-  // Check if interests
-   if( $interests && $interests == 'checked' ) {
-     echo '<select name="SkillsInterests" id="signup_SkillsInterests" class="field">
-  <option value="" disabled selected>Select Procedure</option>';
-  if( $procedureone ) {
-    echo '<option value="'.$procedureone.'">'.$procedureone.'</option>';
-  }
-  if ( $proceduretwo ){
-    echo '<option value="'.$proceduretwo.'">'.$proceduretwo.'</option>';
-  }
-  if ( $procedurethree ){
-    echo '<option value="'.$procedurethree.'">'.$procedurethree.'</option>';
-  }
-  if ( $procedurefour ){
-    echo '<option value="'.$procedurefour.'">'.$procedurefour.'</option>';
-  }
-  echo '<option value="Other">Other</option>
-  </select>';
+  // Check if Location is set
+   if( $location && $location == 'checked' ) {
+     echo '<select name="City" id="signup_City" class="field"/>
+      <option value="" disabled selected>Location</option>';
+     if( $locationone ) {
+        echo '<option value="'.$locationone.'">'.$locationone.'</option>';
+      }
+      if ( $locationtwo ){
+        echo '<option value="'.$locationtwo.'">'.$locationtwo.'</option>';
+      }
+      if ( $locationthree ){
+        echo '<option value="'.$locationthree.'">'.$locationthree.'</option>';
+      }
+      if ( $locationfour ){
+        echo '<option value="'.$locationfour.'">'.$locationfour.'</option>';
+      }
    }
+  // Check if interests
+   if($interests && $interests == 'checked' ) {
+    if($dropdown == 'dropdown'){
+      if($placeholder){
+       echo '<select name="SkillsInterests" id="signup_SkillsInterests" class="field">
+              <option value="" disabled selected>'.$placeholder.'</option>';
+      }
+      else{
+        echo '<select name="SkillsInterests" id="signup_SkillsInterests" class="field">
+              <option value="" disabled selected>Select Procedure</option>';
+      }
+      if( $procedureone ) {
+        echo '<option value="'.$procedureone.'">'.$procedureone.'</option>';
+      }
+      if ( $proceduretwo ){
+        echo '<option value="'.$proceduretwo.'">'.$proceduretwo.'</option>';
+      }
+      if ( $procedurethree ){
+        echo '<option value="'.$procedurethree.'">'.$procedurethree.'</option>';
+      }
+      if ( $procedurefour ){
+        echo '<option value="'.$procedurefour.'">'.$procedurefour.'</option>';
+      }
+      echo '<option value="Other">Other</option>
+      </select>';
+   }
+   else if($dropdown == 'textfield') {
+    if($placeholder){
+     echo '<input type="text" name="SkillsInterests" placeholder="'.$placeholder.'" id="signup_SkillsInterests" class="field" onblur="validateData(this.form,this.id)">';
+    }
+    else{
+      echo '<input type="text" name="SkillsInterests" placeholder="How May We Help?" id="signup_SkillsInterests" class="field" onblur="validateData(this.form,this.id)">';
+    }
+  }
+}
    if ( $submit ) {
       echo '<input id="formSubmit" type="submit" name="formSubmit" value="'.$submit.'" onclick="javascript: return SubmitForm()" />';
    }
@@ -226,11 +336,12 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    }
 
 
-   
-   echo'     <input type="hidden" name="Referrer" value="" /> 
-            <input type="hidden" name="qstring" value=" '.$action.' " /> 
-            <input type="hidden" name="formSubmitCheck" value="1" />
+   if ($actionType == 'standard'){
+   echo'<input type="hidden" name="Referrer" value="" /> 
+        <input type="hidden" name="qstring" value="'.$action.'" /> 
+        <input type="hidden" name="formSubmitCheck" value="1" />
     </div>';
+  }
    echo '</form>
           </div>
         </div>';
@@ -242,22 +353,13 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
 // register widget
 add_action('widgets_init', create_function('', 'return register_widget("wp_my_plugin");'));
 
-//enque scripts
+//enqueue validation script
 function form_validation(){
     wp_register_script('form_validation',plugin_dir_url( __FILE__ ).'js/validation.js');
     wp_enqueue_script('form_validation');
 }
 add_action('wp_enqueue_scripts','form_validation');
 
-/**
- * Register style sheet.
- */
-function register_plugin_styles() {
-  wp_register_style( 'tightrope-style', plugins_url( 'tightrope/css/styles.css' ) );
-  wp_enqueue_style( 'tightrope-style' );
-}
-
-add_action( 'wp_enqueue_scripts', 'register_plugin_styles' );
 
 
 ?>
