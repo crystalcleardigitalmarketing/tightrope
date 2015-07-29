@@ -2,10 +2,11 @@ var validName;
 var validPhone;
 var validEmail;
 var validInterest;
+var validLocation;
 var values = new Array();
 var str = '';
 var str2 = '';
-var noname = nophone = noemail = nointerest = true;
+var noname = nophone = noemail = nointerest = nolocation = true;
 function validateData(form,x){
     event.preventDefault();
         var name = document.getElementById(x).getAttribute('name');
@@ -122,22 +123,58 @@ function SubmitForm()
     event.preventDefault();
     
   var interest = document.getElementById('signup_SkillsInterests');
+  var location = document.getElementById('signup_City');
+  var phone = document.getElementById('signup_Mobile');
 
+  if(phone){
+    var phoneNum = phone.value;
+        var phoneRE = /(?:\d{3}|\(\d{3}\))([-\/\.])\d{3}\1\d{4}/;
+        if(!phoneNum.match(phoneRE)){
+        validPhone = false;
+        alert("Not A Valid Phone Number Use xxx-xxx-xxxx Format");
+        if(values.length == 0){
+        values.push("Invalid Phone");
+            nophone = false;
+        return;
+        }
+        else{
+        for(var i = 0; i < values.length; i++){
+            nophone = false;
+            return;
+            }
+        }
+         if(nophone){
+            values.push("Invalid Phone");
+                nophone = false;
+        return;
+        }
+            }
+    validPhone = true;
+      for(var i = 0; i < values.length; i++){
+          if(values[i] == "Invalid Phone"){
+         values.splice(i,1);
+         nophone = true;
+         return;
+          } 
+      }
+    }
+
+  if(interest){
     if(!interest.value){
     validInterest = false;
     if(values.length == 0 ){
-              values.push("Invalid Interest");
+              values.push("Invalid Service");
         nointerest = false;
     }
     else{
         for(var i = 0; i < values.length; i++){
-      if(values[i] == "Invalid Interest"){
+      if(values[i] == "Invalid Service"){
           nointerest = false;
           break;
       }
         }
     if(nointerest){
-       values.push("Invalid Interest");
+       values.push("Invalid Service");
        nointerest = false;
     }
     }
@@ -145,15 +182,48 @@ function SubmitForm()
   else{
             validInterest = true;
       for(var i = 0; i < values.length; i++){
-          if(values[i]=="Invalid Interest"){
+          if(values[i]=="Invalid Service"){
         values.splice(i,1);
         nointerest = true;
         break;
           }
       }
   }
+}
 
-    if(validName == false && validEmail == false && validPhone == false && validInterest == false){
+if(location){
+    if(!location.value){
+    validLocation = false;
+    if(values.length == 0 ){
+              values.push("Invalid Location");
+        nolocation = false;
+    }
+    else{
+        for(var i = 0; i < values.length; i++){
+      if(values[i] == "Invalid Location"){
+          nolocation = false;
+          break;
+      }
+        }
+    if(nolocation){
+       values.push("Invalid Location");
+       nointerest = false;
+    }
+    }
+  }
+  else{
+            validLocation = true;
+      for(var i = 0; i < values.length; i++){
+          if(values[i]=="Invalid Location"){
+        values.splice(i,1);
+        nolocation = true;
+        break;
+          }
+      }
+  }
+}
+
+    if(validName == false || validEmail == false || validPhone == false || validInterest == false || validLocation){
         str2 = values.toString();
         alert(str2);
     }
