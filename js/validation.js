@@ -125,6 +125,8 @@ function SubmitForm()
   var interest = document.getElementById('signup_SkillsInterests');
   var location = document.getElementById('signup_City');
   var phone = document.getElementById('signup_Mobile');
+  var teamid = document.getElementById('AutomaticTeamIDs')
+  var qstring = document.getElementById('qstring')
 
   if(phone){
     var phoneNum = phone.value;
@@ -223,11 +225,11 @@ if(location){
   }
 }
 
-    if(validName == false || validEmail == false || validPhone == false || validInterest == false || validLocation){
+    if(validName == false || validEmail == false || validPhone == false || validInterest == false || validLocation == false){
         str2 = values.toString();
         alert(str2);
     }
     else{
         document.forms['signupForm'].submit();
-    }
+      }
 }
