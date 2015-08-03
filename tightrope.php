@@ -292,6 +292,7 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
       if ( $locationfour ){
         echo '<option value="'.$locationfour.'">'.$locationfour.'</option>';
       }
+      echo '</select>';
    }
   // Check if interests
    if($interests && $interests == 'checked' ) {
