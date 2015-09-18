@@ -10,14 +10,19 @@ Author URI: http://www.crystalcleardm.com
 License: GPL2
 */
 
-class wp_my_plugin extends WP_Widget {
+class tightrope_form extends WP_Widget {
+
+public $id_base = 'signupForm';
+public $name = 'Tightrope';
+public $number = 1;
+public $id = true;
 
   // constructor
-  function wp_my_plugin() {
-    parent::WP_Widget(false, $name = __('Tightrope', 'tightrope_form_widget') );
-  }
+function tightrope_form() {
+  parent::WP_Widget($id_base, $name = __('Tightrope', 'tightrope_form_widget') );
+}
 
-  // widget form creation
+
 function form($instance) {
 // Check values
 if( $instance) {
@@ -85,12 +90,12 @@ else {
 <input class="widefat" id="<?php echo $this->get_field_id('value'); ?>" name="<?php echo $this->get_field_name('value');?>" type="text" value="<?php echo $value; ?>" />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Unique Form Action:', 'tightrope_form_widget'); ?></label>
-<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="unique" checked="checked" <?php checked( 'unique', $actionType ); ?> />
+<label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Standard API key:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="standard" checked="checked" <?php checked( 'standard', $actionType ); ?> />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Standard API key:', 'tightrope_form_widget'); ?></label>
-<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="standard" <?php checked( 'standard', $actionType ); ?> />
+<label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Unique Form Action:', 'tightrope_form_widget'); ?></label>
+<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="unique" <?php checked( 'unique', $actionType ); ?> />
 </p>
 <p>
 <label for="<?php echo $this->get_field_id('action'); ?>"><?php _e('Form Action:', 'tightrope_form_widget'); ?></label>
@@ -215,6 +220,7 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
   function widget($args, $instance) {
       extract( $args );
    // these are the widget options
+      $number = str_replace('tightrope_form-', '', $widget_id);
    $title = apply_filters('widget_title', $instance['title']);
    $heading = $instance['heading'];
    $subheading = $instance['subheading'];
@@ -247,14 +253,9 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    }
    //form 
    echo '<div class="widget-text tightrope_form_widget_box">
-          <div class="form-container-'.$orientation.'">';
-     if($actionType == 'standard'){
-            echo '<form name="signupForm" id="signupForm" method="post" action="http://app.crystalpec.com/j1.pl?'.$action.'">';
-     }
-     else if($actionType == 'unique'){
-    echo '<form name="signupForm" id="signupForm" method="post" action="'.$action.'">';
-     } 
-           echo '<input type="hidden" name="AutomaticTeamIDs" value='.$value.' />';
+          <div class="form-container-'.$orientation.'">
+            <form name="signupForm" id="signupForm_'.$number.'" method="post" action="https://app.crystalpec.com/j1.pl?'.$action.'"> 
+              <input type="hidden" name="AutomaticTeamIDs" value='.$value.' />';
    // Check if heading is set
    if ( $heading ) {
       echo'<div class="heading"><h2>'.$heading.'</h2></div>';
@@ -266,19 +267,19 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    echo '<div class="form-wrap">';
    // Check if full name is set
    if( $fullname && $fullname == 'checked' ) {
-     echo '<input type="text" name="FullName" placeholder="Full Name" maxlength="64" id="signup_FullName" class="field" onblur="validateData(this.form,this.id)"/>';
+     echo '<input type="text" name="FullName" placeholder="Full Name" maxlength="64" id="signup_FullName_'.$number.'" class="field" onblur="checkName('.$number.')"/>';
    }
    // Check if Email is set
    if( $email && $email == 'checked' ) {
-     echo '<input type="email" name="Email" placeholder="Email" maxlength="64" id="signup_Email" class="field" onblur="validateData(this.form,this.id)"/>';
+     echo '<input type="email" name="Email" placeholder="Email" maxlength="64" id="signup_Email_'.$number.'" class="field" onblur="checkEmail('.$number.')"/>';
    }
    // Check if Phone is set
    if( $phone && $phone == 'checked' ) {
-     echo '<input type="text" name="Mobile" placeholder="Phone" maxlength="64" id="signup_Mobile" class="field" onblur="validateData(this.form,this.id)"/>';
+     echo '<input type="text" name="Mobile" placeholder="Phone" maxlength="64" id="signup_Mobile_'.$number.'" class="field" onblur="checkPhone('.$number.')"/>';
    }
-  // Check if Location is set
+   // Check if Location is set
    if( $location && $location == 'checked' ) {
-     echo '<select name="City" id="signup_City" class="field"/>
+     echo '<select name="City" id="signup_City_'.$number.'" class="field" onchange="checkLocation('.$number.')"/>
       <option value="" disabled selected>Location</option>';
      if( $locationone ) {
         echo '<option value="'.$locationone.'">'.$locationone.'</option>';
@@ -298,11 +299,11 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    if($interests && $interests == 'checked' ) {
     if($dropdown == 'dropdown'){
       if($placeholder){
-       echo '<select name="SkillsInterests" id="signup_SkillsInterests" class="field">
+       echo '<select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" onchange="checkInterest('.$number.')">
               <option value="" disabled selected>'.$placeholder.'</option>';
       }
       else{
-        echo '<select name="SkillsInterests" id="signup_SkillsInterests" class="field">
+        echo '<select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" onchange="checkInterest('.$number.')">
               <option value="" disabled selected>Select Procedure</option>';
       }
       if( $procedureone ) {
@@ -322,27 +323,26 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    }
    else if($dropdown == 'textfield') {
     if($placeholder){
-     echo '<input type="text" name="SkillsInterests" placeholder="'.$placeholder.'" id="signup_SkillsInterests" class="field" onblur="validateData(this.form,this.id)">';
+     echo '<input type="text" name="SkillsInterests" placeholder="'.$placeholder.'" id="signup_SkillsInterests_'.$number.'" class="field" onblur="checkInterest('.$number.')">';
     }
     else{
-      echo '<input type="text" name="SkillsInterests" placeholder="How May We Help?" id="signup_SkillsInterests" class="field" onblur="validateData(this.form,this.id)">';
+      echo '<input type="text" name="SkillsInterests" placeholder="How May We Help?" id="signup_SkillsInterests_'.$number.'" class="field" onblur="checkInterest('.$number.')">';
     }
   }
 }
    if ( $submit ) {
-      echo '<input id="formSubmit" type="submit" name="formSubmit" value="'.$submit.'" onclick="javascript: return SubmitForm()" />';
+      echo '<input id="formSubmit" type="submit" name="formSubmit" value="'.$submit.'" onclick="javascript: return SubmitForm('.$number.')" />';
    }
    if ( !$submit ) {
-      echo '<input id="formSubmit" type="submit" name="formSubmit" value="Send" onclick="javascript: return SubmitForm()" />';
+      echo '<input id="formSubmit" type="submit" name="formSubmit" value="Send" onclick="javascript: return SubmitForm('.$number.')" />';
    }
 
 
-   if ($actionType == 'standard'){
+   
    echo'<input type="hidden" name="Referrer" value="" /> 
         <input type="hidden" name="qstring" value="'.$action.'" /> 
         <input type="hidden" name="formSubmitCheck" value="1" />
     </div>';
-  }
    echo '</form>
           </div>
         </div>';
@@ -352,7 +352,7 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
 }
 
 // register widget
-add_action('widgets_init', create_function('', 'return register_widget("wp_my_plugin");'));
+add_action('widgets_init', create_function('', 'return register_widget("tightrope_form");'));
 
 //enqueue validation script
 function form_validation(){
