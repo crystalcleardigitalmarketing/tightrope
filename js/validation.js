@@ -7,11 +7,20 @@
   //our name validation, check to make sure only letters were entered,
   //no odd characters or anything.
   function checkName(number){
-    event.preventDefault();
+    
     var number = parseInt(number);
     var regEx = /[a-zA-Z]/;
     var id = 'signup_FullName_'+number;
     var name = document.getElementById(id);
+    var msg = document.getElementById('name');
+
+    if(name.dataset.status == 'optional'){
+  if(!name.value){
+    name.setAttribute('class', 'field valid');
+    msg.innerHTML = "Passed";
+    return true;
+  } 
+    }
 
     //check if we have a value or not for this field, if not check to see
     //if an invalid class has been added yet, if not add it and alert the user
@@ -19,8 +28,8 @@
       if(name.getAttribute("class").indexOf('invalid') == -1){
         name.setAttribute('class', 'field invalid');
       }
-      alert("Field is required");
-      return;
+      msg.innerHTML = "Required Field";
+      return false;
     }
 
     //we get here if the field has a value, now we will make sure it is a valid one
@@ -30,8 +39,8 @@
       if(name.getAttribute("class").indexOf('invalid') == -1){
         name.setAttribute('class', 'field invalid');
       }
-        alert("Not A Valid Name");
-        return;
+        msg.innerHTML = "Invalid Name";
+        return false;
       }
       //we have good data in this field and have passed validation
       //now we check to see if previous bad data was entered by looking for
@@ -39,105 +48,147 @@
       //we then set the new valid class which means we have good data
       if(name.getAttribute("class").indexOf('invalid') != -1){
         name.setAttribute('class', 'field valid');
-        return;
+  msg.innerHTML = "Passed";
+        return true;
       }
       name.setAttribute('class', 'field valid');
+      msg.innerHTML = "Passed";
+      return true;
   }
 
   //every part of this function operates the same as above, the only
   //difference is that this one checks emails, but the functionality is the same.
   function checkEmail(number){
-    event.preventDefault();
+    
     var id = 'signup_Email_'+number;
     var email = document.getElementById(id);
+    var msg = document.getElementById('email');
+
+    if(email.dataset.status == 'optional'){
+  if(!email.value){
+    email.setAttribute('class', 'field valid');
+    msg.innerHTML = 'passed';
+  return true;
+  } 
+    }
 
     if (!email.value){
       if(email.getAttribute("class").indexOf('invalid') == -1){
         email.setAttribute('class', 'field invalid');
       }
-      alert("Field is required");
-      return;
+      msg.innerHTML="Required Field";
+      return false;
     }
 
     if(email.value.indexOf('@') == -1){
       if(email.getAttribute("class").indexOf('invalid') == -1){
         email.setAttribute('class', 'field invalid');
       }
-        alert("Not A Valid Email");
-        return;
+        msg.innerHTML="Not A Valid Email";
+        return false;
       }
       if(email.getAttribute("class").indexOf('invalid') != -1){
         email.setAttribute('class', 'field valid');
-        return;
+  msg.innerHTML="Passed";
+        return true;
       }
       email.setAttribute('class', 'field valid');
+      msg.innerHTML="Passed";
+      return true;
   }
 
   //function is the same as the two previous ones.
   function checkPhone(number){
-    event.preventDefault();
+    
     var id = 'signup_Mobile_'+number;
-    var regEx = /(?:\d{3}|\(\d{3}\))([-\/\.])\d{3}\1\d{4}/;
+    var regEx = /^\(?([1-9]{1}[0-9]{2})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
     var phone = document.getElementById(id);
+    var msg = document.getElementById('phone');
+    console.log(msg);
 
+    if(phone.dataset.status == 'optional'){
+    if(!phone.value){
+      phone.setAttribute('class', 'field valid');
+      msg.innerHTML='Passed';
+      return true;
+    }
+    }
     if (!phone.value){
       if(phone.getAttribute("class").indexOf('invalid') == -1){
         phone.setAttribute('class', 'field invalid');
       }
-      alert("Field is required");
-      return;
+      msg.innerHTML="Required Field";
+      return false;
     }
 
     if(!phone.value.match(regEx)){
       if(phone.getAttribute("class").indexOf('invalid') == -1){
         phone.setAttribute('class', 'field invalid');
       }
-        alert("Not A Valid Phone Number Use xxx-xxx-xxxx Format");
-        return;
+        msg.innerHTML="Invalid Phone";
+        return false;
       }
       if(phone.getAttribute("class").indexOf('invalid') != -1){
         phone.setAttribute('class', 'field valid');
-        return;
+  msg.innerHTML='Passed';
+        return true;
       }
       phone.setAttribute('class', 'field valid');
+      msg.innerHTML='Passed';
+      return true
   }
 
   //this function does the same as the previous ones also, fundamentally
   //all these functions do the same thing and operate under the same logic
   function checkInterest(number){
-    event.preventDefault();
+    
     var id = 'signup_SkillsInterests_'+number;
     var regEx = /[a-zA-Z0-9]/;
     var interest = document.getElementById(id);
+    var msg = document.getElementById('service');
+
+    if(interest.dataset.status == 'optional'){
+  if(!interest.value){
+    interest.setAttribute('class', 'field valid');
+  msg.innerHTML='Passed';
+  return true;
+  } 
+    }
+
     if (!interest.value){
       if(interest.getAttribute("class").indexOf('invalid') == -1){
         interest.setAttribute('class', 'field invalid');
       }
-      alert("Field is required");
-      return;
+      msg.innerHTML="Required Field";
+      return false;
     }
     if(!interest.value.match(regEx)){
       if(interest.getAttribute("class").indexOf('invalid') == -1){
         interest.setAttribute('class', 'field invalid');
       }
-        alert("Not A Valid Interest Or Service");
-        return;
+        msg.innerHTML="Not A Valid Service";
+        return false;
       }
     if(interest.getAttribute("class").indexOf('invalid') != -1){
       interest.setAttribute('class', 'field valid');
-      return;
+      msg.innerHTML='Passed';
+      return true;
     }
     interest.setAttribute('class', 'field valid');
+  msg.innerHTML='Passed';
+    return true;
   }
 
   //this one is a bit unique as the field will always be a select field
   //so this one just checks to see if an option was selected
   //if it was add a valid class
   function checkLocation(number){
-    event.preventDefault();
+    
     var id = 'signup_City_'+number;
     var location = document.getElementById(id);
+    var msg = document.getElementById('location');
     location.setAttribute('class', 'field valid');
+    msg.innerHTML='Passed';
   }
 
   //this function determines which fields are being used. if the field is in use check the data
@@ -149,76 +200,111 @@
   function findAllActiveFields(number, form, name, email, phone, interest, location){
     fields = [];
     formPass = true;
+    
     if(name != null){
+      var nameMsg = document.getElementById('name');
       namePass = true;
       if(!name.value){
-        if(name.getAttribute("class").indexOf('invalid') == -1){
-          name.setAttribute('class', 'field invalid');
+  if (name.dataset.status == 'optional'){
+    name.setAttribute('class', 'field valid');
+      nameMsg.innerHTML='Passed';
+  }
+  else{
+            if(name.getAttribute("class").indexOf('invalid') == -1){
+            name.setAttribute('class', 'field invalid');
+    nameMsg.innerHTML='Required Field';
+            }
+            namePass = false;  
         }
-        namePass = false;  
       }
       else if(name.value){
-        if(name.getAttribute("class").indexOf('invalid') != -1){
-          namePass = false;
-        }
+        namePass = checkName(number);
       }
       fields.push(namePass);
     }
 
     if(email != null){
+  emailMsg = document.getElementById('email');
       emailPass = true;
       if(!email.value){
-        if(email.getAttribute("class").indexOf('invalid') == -1){
-          email.setAttribute('class', 'field invalid');
+          if(email.dataset.status == 'optional'){
+     email.setAttribute('class', 'field valid');
+    emailMsg.innerHTML='Passed';
+     }
+     else{
+               if(email.getAttribute("class").indexOf('invalid') == -1){
+                   email.setAttribute('class', 'field invalid');
+       emailMsg.innerHTML='Required Field';
+               }
+              emailPass = false;
+     }
         }
-        emailPass = false;
-      }
       else if(email.value){
-        if(email.getAttribute("class").indexOf('invalid') != -1){
-          emailPass = false;
-        }
+        emailPass = checkEmail(number);
       }
       fields.push(emailPass);
     }
 
     if(phone != null){
+      phoneMsg = document.getElementById('phone');
       phonePass = true;
       if(!phone.value){
+  if(phone.dataset.status == 'optional'){
+    phone.setAttribute('class', 'field valid');
+  phoneMsg.innerHTML='Passed';
+  }
+        else{
         if(phone.getAttribute("class").indexOf('invalid') == -1){
           phone.setAttribute('class', 'field invalid');
+    phoneMsg.innerHTML='Required Field';
         }
         phonePass = false;
+  }
       }
       else if(phone.value){
-        if(phone.getAttribute("class").indexOf('invalid') != -1){
-          phonePass = false;
-        }
+        
+          phonePass = checkPhone(number);
       }
       fields.push(phonePass);
     }
 
     if(interest != null){
+      serviceMsg = document.getElementById('service');
       interestPass = true;
       if(!interest.value){
+  if(interest.dataset.status == 'optional'){
+    interest.setAttribute('class', 'field valid');
+    serviceMsg.innerHTML='Passed';
+  }
+  else {
         if(interest.getAttribute("class").indexOf('invalid') == -1){
           interest.setAttribute('class', 'field invalid');
+          service.innerHTML='Required Field';
         }
         interestPass = false;
+  }
       }
       else if(interest.value){
-        if (interest.getAttribute("class").indexOf('invalid') != -1){
-          interestPass = false;
-        }
+        interestPass = checkInterest(number); 
+      
       }
       fields.push(interestPass);
     }
 
     if(location != null){
+      var locationMsg = document.getElementById('location');
       locationPass = true;
       if(!location.value){
+  if(location.dataset.status == 'optional'){
+    location.setAttribute('class', 'field valid');
+    locationMsg.innerHTML='Passed';
+  }
+  else {
         if(location.getAttribute("class").indexOf('invalid') == -1){
           location.setAttribute('class', 'field invalid');
+          locationMsg.innerHTML='Required Field';
         }
+   }
         locationPass = false;
       }
       fields.push(locationPass);
@@ -243,7 +329,7 @@
   //this function submits the form
   //it just takes the number of the form instance
   //as an argument
-  function SubmitForm(number) {
+  function SubmitForm(event, number) {
     event.preventDefault();
 
     //get all of our form id strings so we can use them

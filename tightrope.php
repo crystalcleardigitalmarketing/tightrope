@@ -35,6 +35,7 @@ if( $instance) {
      $fullname = esc_attr($instance['fullname']);
      $email = esc_attr($instance['email']);
      $phone = esc_attr($instance['phone']);
+     $captcha = esc_attr($instance['captcha']);
      $location = esc_attr($instance['location']);
      $locationone = esc_attr($instance['locationone']);
      $locationtwo = esc_attr($instance['locationtwo']);
@@ -61,6 +62,7 @@ else {
      $fullname= '';
      $email = '';
      $phone = '';
+     $captcha = '';
      $location = '';
      $interests = '';
      $dropdown = '';
@@ -73,6 +75,7 @@ else {
      $submit = '';
 }
 ?>
+
 <p>
 <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'tightrope_form_widget'); ?></label>
 <input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
@@ -91,7 +94,7 @@ else {
 </p>
 <p>
 <label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Standard API key:', 'tightrope_form_widget'); ?></label>
-<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="standard" checked="checked" <?php checked( 'standard', $actionType ); ?> />
+<input class="widefat" id="<?php echo $this->get_field_id('actionType'); ?>" name="<?php echo $this->get_field_name('actionType');?>" type="radio" value="standard"  <?php checked( 'standard', $actionType ); ?> />
 </p>
 <p>
 <label for="<?php echo $this->get_field_id('actionType'); ?>"><?php _e('Unique Form Action:', 'tightrope_form_widget'); ?></label>
@@ -102,20 +105,48 @@ else {
 <input class="widefat" id="<?php echo $this->get_field_id('action'); ?>" name="<?php echo $this->get_field_name('action');?>" type="text" value="<?php echo $action; ?>" />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('fullname'); ?>"><?php _e('Full Name:', 'tightrope_form_widget'); ?></label>
-<input id="<?php echo $this->get_field_id('fullname'); ?>" name="<?php echo $this->get_field_name('fullname'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $fullname ); ?> />
+<span>Full Name:</span>
+<br />
+<label for="fullname_required"><?php _e('Required:', 'tightrope_form_widget'); ?></label>
+<input id="fullname_required" name="<?php echo $this->get_field_name('fullname'); ?>" type="radio" value="required" <?php checked( 'required', $fullname ); ?> />
+<label for="fullname_optional"><?php _e('Optional:', 'tightrope_form_widget'); ?></label>
+<input id="fullname_optional" name="<?php echo $this->get_field_name('fullname'); ?>" type="radio" value="optional" <?php checked( 'optional', $fullname ); ?> />
+<label for="fullname_not_used"><?php _e('Not Used:', 'tightrope_form_widget'); ?></label>
+<input id="fullname_not_used" name="<?php echo $this->get_field_name('fullname'); ?>" type="radio" value="not used" <?php checked( 'not used', $fullname ); ?> />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('email'); ?>"><?php _e('Email:', 'tightrope_form_widget'); ?></label>
-<input id="<?php echo $this->get_field_id('email'); ?>" name="<?php echo $this->get_field_name('email'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $email ); ?> />
+<span>Email:</span>
+<br />
+<label for="email_required"><?php _e('Required:', 'tightrope_form_widget'); ?></label>
+<input id="email_required" name="<?php echo $this->get_field_name('email'); ?>" type="radio" value="required"  <?php checked( 'required', $email ); ?> />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('phone'); ?>"><?php _e('Phone:', 'tightrope_form_widget'); ?></label>
-<input id="<?php echo $this->get_field_id('phone'); ?>" name="<?php echo $this->get_field_name('phone'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $phone ); ?> />
+<span>Phone:</span>
+<br />
+<label for="phone_required"><?php _e('Required:', 'tightrope_form_widget'); ?></label>
+<input id="phone_required" name="<?php echo $this->get_field_name('phone'); ?>" type="radio" value="required"  <?php checked( 'required', $phone ); ?> />
+<label for="phone_optional"><?php _e('Optional:', 'tightrope_form_widget'); ?></label>
+<input id="phone_optional" name="<?php echo $this->get_field_name('phone'); ?>" type="radio" value="optional" <?php checked( 'optional', $phone ); ?> />
+<label for="phone_not_used"><?php _e('Not Used:', 'tightrope_form_widget'); ?></label>
+<input id="phone_not_used" name="<?php echo $this->get_field_name('phone'); ?>" type="radio" value="not used" <?php checked( 'not used', $phone ); ?> />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('location'); ?>"><?php _e('Location:', 'tightrope_form_widget'); ?></label>
-<input id="<?php echo $this->get_field_id('location'); ?>" name="<?php echo $this->get_field_name('location'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $location ); ?> />
+<span>Captcha:</span>
+<br />
+<label for="captcha_required"><?php _e('Required:', 'tightrope_form_widget'); ?></label>
+<input id="captcha_required" name="<?php echo $this->get_field_name('captcha'); ?>" type="radio" value="required" <?php checked( 'required', $captcha ); ?> />
+<label for="captcha_not_used"><?php _e('Not Used:', 'tightrope_form_widget'); ?></label>
+<input id="captcha_not_used" name="<?php echo $this->get_field_name('captcha'); ?>" type="radio" value="not used"  <?php checked( 'not used', $captcha ); ?> />
+</p>
+<p>
+<span>Location:</span>
+<br />
+<label for="location_required"><?php _e('Required:', 'tightrope_form_widget'); ?></label>
+<input id="location_required" name="<?php echo $this->get_field_name('location'); ?>" type="radio" value="required" <?php checked( 'required', $location ); ?> />
+<label for="location_optional"><?php _e('Optional:', 'tightrope_form_widget'); ?></label>
+<input id="location_optional" name="<?php echo $this->get_field_name('location'); ?>" type="radio" value="optional" <?php checked( 'optional', $location ); ?> />
+<label for="location_not_used"><?php _e('Not Used:', 'tightrope_form_widget'); ?></label>
+<input id="location_not_used" name="<?php echo $this->get_field_name('location'); ?>" type="radio" value="not used"  <?php checked( 'not used', $location ); ?> />
 </p>
 <p>
 <label for="<?php echo $this->get_field_id('locationone'); ?>"><?php _e('Location 1:', 'tightrope_form_widget'); ?></label>
@@ -134,12 +165,18 @@ else {
 <input class="widefat" id="<?php echo $this->get_field_id('locationfour'); ?>" name="<?php echo $this->get_field_name('locationfour');?>" type="text" value="<?php echo $locationfour; ?>" />
 </p>
 <p>
-<label for="<?php echo $this->get_field_id('interests'); ?>"><?php _e('Interests:', 'tightrope_form_widget'); ?></label>
-<input id="<?php echo $this->get_field_id('interests'); ?>" name="<?php echo $this->get_field_name('interests'); ?>" type="checkbox" value="checked" <?php checked( 'checked', $interests ); ?> />
+<span>Interests:</span>
+<br />
+<label for="interests_required"><?php _e('Required:', 'tightrope_form_widget'); ?></label>
+<input id="interests_required" name="<?php echo $this->get_field_name('interests'); ?>" type="radio" value="required"  <?php checked( 'required', $interests ); ?> />
+<label for="interests_optional"><?php _e('Optional:', 'tightrope_form_widget'); ?></label>
+<input id="interests_optional" name="<?php echo $this->get_field_name('interests'); ?>" type="radio" value="optional" <?php checked( 'optional', $interests ); ?> />
+<label for="interests_not_used"><?php _e('Not Used:', 'tightrope_form_widget'); ?></label>
+<input id="interests_not_used" name="<?php echo $this->get_field_name('interests'); ?>" type="radio" value="not used" <?php checked( 'not used', $interests ); ?> />
 </p>
 <p>
 <label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e('Dropdown:', 'tightrope_form_widget'); ?></label>
-<input id="<?php echo $this->get_field_id('dropdown'); ?>" name="<?php echo $this->get_field_name('dropdown'); ?>" type="radio" value="dropdown" checked="checked" <?php checked( 'dropdown', $dropdown ); ?> />
+<input id="<?php echo $this->get_field_id('dropdown'); ?>" name="<?php echo $this->get_field_name('dropdown'); ?>" type="radio" value="dropdown"  <?php checked( 'dropdown', $dropdown ); ?> />
 </p>
 <p>
 <label for="<?php echo $this->get_field_id('dropdown'); ?>"><?php _e('Text Field:', 'tightrope_form_widget'); ?></label>
@@ -198,6 +235,7 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
       $instance['fullname'] = strip_tags($new_instance['fullname']);
       $instance['email'] = strip_tags($new_instance['email']);
       $instance['phone'] = strip_tags($new_instance['phone']);
+      $instance['captcha'] = strip_tags($new_instance['captcha']);
       $instance['location'] = strip_tags($new_instance['location']);
       $instance['locationone'] = strip_tags($new_instance['locationone']);
       $instance['locationtwo'] = strip_tags($new_instance['locationtwo']);
@@ -230,6 +268,7 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
    $fullname = $instance['fullname'];
    $email = $instance['email'];
    $phone = $instance['phone'];
+   $captcha = $instance['captcha'];
    $location = $instance['location'];
    $locationone = $instance['locationone'];
    $locationtwo = $instance['locationtwo'];
@@ -265,21 +304,63 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
       echo'<div class="subheading"><h4>'.$subheading.'</h4></div>';
    }
    echo '<div class="form-wrap">';
+   echo '<div class="field-wrap">';
    // Check if full name is set
-   if( $fullname && $fullname == 'checked' ) {
-     echo '<input type="text" name="FullName" placeholder="Full Name" maxlength="64" id="signup_FullName_'.$number.'" class="field" onblur="checkName('.$number.')"/>';
+   if ($fullname != 'not used'){
+    if( $fullname == 'required' ) {
+      echo '<div class="name-wrap">
+    <input type="text" name="FullName" placeholder="Full Name*" maxlength="64" id="signup_FullName_'.$number.'" class="field" data-status="required" onblur="checkName('.$number.')"/>
+          <span id="name" class="error-msg"></span>
+      </div>';
+    }
+    else if($fullname == 'optional'){
+      echo '<div class="name-wrap">
+    <input type="text" name="FullName" placeholder="Full Name" maxlength="64" id="signup_FullName_'.$number.'" class="field" data-status="optional" onblur="checkName('.$number.')"/>
+      </div>';
+    }
    }
-   // Check if Email is set
-   if( $email && $email == 'checked' ) {
-     echo '<input type="email" name="Email" placeholder="Email" maxlength="64" id="signup_Email_'.$number.'" class="field" onblur="checkEmail('.$number.')"/>';
-   }
+   //Email will always be set, it is required no matter what, no reason to check for it
+    echo '<div class="email-wrap">
+            <input type="email" name="Email" placeholder="Email*" maxlength="64" id="signup_Email_'.$number.'" class="field" data-status="required" onblur="checkEmail('.$number.')"/>
+            <span id="email" class="error-msg"></span>
+          </div>';
    // Check if Phone is set
-   if( $phone && $phone == 'checked' ) {
-     echo '<input type="text" name="Mobile" placeholder="Phone" maxlength="64" id="signup_Mobile_'.$number.'" class="field" onblur="checkPhone('.$number.')"/>';
+   if($phone != 'not used'){
+    if( $phone == 'required' ) {
+      echo '<div class="phone-wrap">
+    <input type="text" name="Mobile" placeholder="Phone*" maxlength="64" id="signup_Mobile_'.$number.'" class="field" data-status="required" onblur="checkPhone('.$number.')"/>
+    <span id="phone" class="error-msg">
+      </div>';
+    }
+    else if( $phone == 'optional' ) {
+      echo '<div class="phone-wrap">
+    <input type="text" name="Mobile" placeholder="Phone" maxlength="64" id="signup_Mobile_'.$number.'" class="field" data-status="optional" onblur="checkPhone('.$number.')"/>
+      </div>';
+    }
    }
    // Check if Location is set
-   if( $location && $location == 'checked' ) {
-     echo '<select name="City" id="signup_City_'.$number.'" class="field" onchange="checkLocation('.$number.')"/>
+   if($location != 'not used'){
+    if( $location == 'required' ) {
+     echo '<div class="location-wrap"><select name="City" id="signup_City_'.$number.'" class="field" data-status="required" onchange="checkLocation('.$number.')"/>
+      <option value="" disabled selected>Location*</option>';
+     if( $locationone ) {
+        echo '<option value="'.$locationone.'">'.$locationone.'</option>';
+      }
+      if ( $locationtwo ){
+        echo '<option value="'.$locationtwo.'">'.$locationtwo.'</option>';
+      }
+      if ( $locationthree ){
+        echo '<option value="'.$locationthree.'">'.$locationthree.'</option>';
+      }
+      if ( $locationfour ){
+        echo '<option value="'.$locationfour.'">'.$locationfour.'</option>';
+      }
+      echo '</select>
+  <span id="location" class="error-msg"></span>
+  </div>';
+    }
+    else if( $location == 'optional' ) {
+     echo '<div class="location-wrap"><select name="City" id="signup_City_'.$number.'" class="field" data-status="optional" onchange="checkLocation('.$number.')"/>
       <option value="" disabled selected>Location</option>';
      if( $locationone ) {
         echo '<option value="'.$locationone.'">'.$locationone.'</option>';
@@ -293,17 +374,60 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
       if ( $locationfour ){
         echo '<option value="'.$locationfour.'">'.$locationfour.'</option>';
       }
-      echo '</select>';
+      echo '</select></div>';
+    }
    }
   // Check if interests
-   if($interests && $interests == 'checked' ) {
-    if($dropdown == 'dropdown'){
+   if($interests != 'not used'){
+    if($interests == 'required' && $dropdown == 'dropdown' ) {
       if($placeholder){
-       echo '<select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" onchange="checkInterest('.$number.')">
+       echo '<div class="service-wrap">
+    <select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" data-status="required" onchange="checkInterest('.$number.')">
+               <option value="" disabled selected>'.$placeholder.'*</option>';
+      }
+      else{
+        echo '<div class="service-wrap">
+    <select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" data-status="required" onchange="checkInterest('.$number.')">
+                <option value="" disabled selected>Service*</option>';
+      }
+      if( $procedureone ) {
+        echo '<option value="'.$procedureone.'">'.$procedureone.'</option>';
+      }
+      if ( $proceduretwo ){
+        echo '<option value="'.$proceduretwo.'">'.$proceduretwo.'</option>';
+      }
+      if ( $procedurethree ){
+        echo '<option value="'.$procedurethree.'">'.$procedurethree.'</option>';
+      }
+      if ( $procedurefour ){
+        echo '<option value="'.$procedurefour.'">'.$procedurefour.'</option>';
+      }
+      echo '<option value="Other">Other</option>
+      </select>
+  <span id="service" class="error-msg"></span>
+  </div>';
+   }
+   else if( $interests == 'required' && $dropdown == 'textfield') {
+    if($placeholder){
+      echo '<div class="service-wrap">
+    <input type="text" name="SkillsInterests" placeholder="'.$placeholder.'*" id="signup_SkillsInterests_'.$number.'" class="field" data-status="required" onblur="checkInterest('.$number.')">
+    <span id="service" class="error-msg">
+      </div>';
+    }
+    else{
+      echo '<div class="service-wrap">
+    <input type="text" name="SkillsInterests" placeholder="Service*" id="signup_SkillsInterests_'.$number.'" class="field" data-status="required" onblur="checkInterest('.$number.')">
+    <span id="service" class="error-msg">
+      </div>';
+    }
+  }
+  else if($interests == 'optional' && $dropdown == 'dropdown' ) {
+      if($placeholder){
+       echo '<div class="service-wrap"><select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" data-status="optional" onchange="checkInterest('.$number.')">
               <option value="" disabled selected>'.$placeholder.'</option>';
       }
       else{
-        echo '<select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" onchange="checkInterest('.$number.')">
+        echo '<select name="SkillsInterests" id="signup_SkillsInterests_'.$number.'" class="field" data-status="optional" onchange="checkInterest('.$number.')">
               <option value="" disabled selected>Select Procedure</option>';
       }
       if( $procedureone ) {
@@ -319,25 +443,40 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
         echo '<option value="'.$procedurefour.'">'.$procedurefour.'</option>';
       }
       echo '<option value="Other">Other</option>
-      </select>';
+      </select></div>';
    }
-   else if($dropdown == 'textfield') {
+   else if( $interests == 'optional' && $dropdown == 'textfield') {
     if($placeholder){
-     echo '<input type="text" name="SkillsInterests" placeholder="'.$placeholder.'" id="signup_SkillsInterests_'.$number.'" class="field" onblur="checkInterest('.$number.')">';
+     echo '<div class="service-wrap">
+    <input type="text" name="SkillsInterests" placeholder="'.$placeholder.'" id="signup_SkillsInterests_'.$number.'" class="field" data-status="optional" onblur="checkInterest('.$number.')">
+     </div>';
     }
     else{
-      echo '<input type="text" name="SkillsInterests" placeholder="How May We Help?" id="signup_SkillsInterests_'.$number.'" class="field" onblur="checkInterest('.$number.')">';
+     echo '<div class="service-wrap">
+    <input type="text" name="SkillsInterests" placeholder="Service" id="signup_SkillsInterests_'.$number.'" class="field" data-status="optional" onblur="checkInterest('.$number.')">
+     </div>';
     }
   }
 }
+  if($captcha == 'required'){
+   echo '</div>';
+    echo '<div id="captchaTable">
+    <div id="captchaText">For security purposes, please type the letters and numbers you see below.</div>
+        <ul>
+        <li><img id="captchaImage" src="https://app.crystalpec.com/captcha.pl?20150616061554"></li>
+        <li><input id="captchaInput" type="text" name="captcha" size="16" maxlength="6" style="color: #fff; font-weight: bold; font-family: verdana; font-size: 14px;" class="field"></li>
+        <li><input id="formSubmit" type="submit" name="formSubmit" value="Send" onclick="javascript: return SubmitForm(event, '.$number.')" /></li></ul></div>';
+   }
+   if($captcha != 'required'){
    if ( $submit ) {
-      echo '<input id="formSubmit" type="submit" name="formSubmit" value="'.$submit.'" onclick="javascript: return SubmitForm('.$number.')" />';
+      echo '<input id="formSubmit" type="submit" name="formSubmit" value="'.$submit.'" onclick="javascript: return SubmitForm(event, '.$number.')" />';
+  echo '</div>';
    }
    if ( !$submit ) {
-      echo '<input id="formSubmit" type="submit" name="formSubmit" value="Send" onclick="javascript: return SubmitForm('.$number.')" />';
+      echo '<input id="formSubmit" type="submit" name="formSubmit" value="Send" onclick="javascript: return SubmitForm(event, '.$number.')" />';
+  echo '</div>';
    }
-
-
+ }
    
    echo'<input type="hidden" name="Referrer" value="" /> 
         <input type="hidden" name="qstring" value="'.$action.'" /> 
@@ -348,9 +487,7 @@ echo '<option value="' . $value . '" id="' . $value . '"', $orientation == $valu
         </div>';
    echo $after_widget;
   }
-
 }
-
 // register widget
 add_action('widgets_init', create_function('', 'return register_widget("tightrope_form");'));
 
@@ -361,6 +498,13 @@ function form_validation(){
 }
 add_action('wp_enqueue_scripts','form_validation');
 
+/**
+ * Register style sheet.
+ */
+function register_plugin_styles() {
+  wp_register_style( 'tightrope-style', plugins_url( 'tightrope/css/styles.css' ) );
+  wp_enqueue_style( 'tightrope-style' );
+}
 
-
+add_action( 'wp_enqueue_scripts', 'register_plugin_styles' );
 ?>
