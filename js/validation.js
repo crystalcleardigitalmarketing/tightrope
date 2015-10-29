@@ -65,11 +65,11 @@
     var msg = document.getElementById('email');
 
     if(email.dataset.status == 'optional'){
-  if(!email.value){
-    email.setAttribute('class', 'field valid');
-    msg.innerHTML = 'passed';
-  return true;
-  } 
+      if(!email.value){
+        email.setAttribute('class', 'field valid');
+        msg.innerHTML = 'passed';
+        return true;
+      } 
     }
 
     if (!email.value){
